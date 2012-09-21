@@ -1,0 +1,5 @@
+name: DiskControl
+main: com.github.weevkin.diskcontrol.DiskControl
+version: 0.0.1
+author: weevkin
+description: A plugin to monitor who stole the record!
