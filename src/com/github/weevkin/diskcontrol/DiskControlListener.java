@@ -29,12 +29,16 @@ public class DiskControlListener implements Listener{
 	
 	@EventHandler
 	public void onPlayerLogin(PlayerJoinEvent event) throws SQLException{
-		Player p = event.getPlayer();
-		
 		String query = "SELECT * FROM capture_info ORDER BY date desc LIMIT 1";
-		ResultSet result = this.plugin.runQuery(query);
-		Bukkit.broadcastMessage(result.getString("player"));
+		//ResultSet result = this.plugin.runQuery(query);
 		
+		ResultSet res = this.plugin.runSelect(query);
+
+		if (res != null && res.next()) {
+			String player = res.getString("player");
+			String date = res.getString("date");
+			Bukkit.broadcastMessage(player + "stole the disk at " + date);
+		}
 	}
 	
 	@EventHandler
@@ -74,7 +78,7 @@ public class DiskControlListener implements Listener{
 			Bukkit.broadcastMessage(p.getDisplayName() + " has placed the Disk into a Jukebox");
 			
 			String query = "INSERT INTO capture_info(`player`, `date`) VALUES('"+p.getDisplayName()+"', NOW());";
-			this.plugin.runQuery(query);
+			this.plugin.runInsert(query);
 		}
 	}
 }
