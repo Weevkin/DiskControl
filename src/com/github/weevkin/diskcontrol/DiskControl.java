@@ -94,14 +94,15 @@ public class DiskControl extends JavaPlugin{
     }
 	
 	public ResultSet runQuery(String query){
-		String result;
+		ResultSet result = null;
 		if (this.MySQL) {
 			try {
 				result = this.mysql.query(query);
 			}
 			catch (SQLException e) {
-				result = e.printStackTrace();
+				e.printStackTrace();
 			}
 		}
+		return result;
 	}
 }

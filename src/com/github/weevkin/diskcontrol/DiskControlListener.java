@@ -13,6 +13,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 
 public class DiskControlListener implements Listener{
@@ -24,6 +25,16 @@ public class DiskControlListener implements Listener{
 	
 	public DiskControlListener(DiskControl plugin) {
 		this.plugin = plugin;
+	}
+	
+	@EventHandler
+	public void onPlayerLogin(PlayerJoinEvent event) throws SQLException{
+		Player p = event.getPlayer();
+		
+		String query = "SELECT * FROM capture_info ORDER BY date desc LIMIT 1";
+		ResultSet result = this.plugin.runQuery(query);
+		Bukkit.broadcastMessage(result.getString("player"));
+		
 	}
 	
 	@EventHandler
@@ -63,9 +74,7 @@ public class DiskControlListener implements Listener{
 			Bukkit.broadcastMessage(p.getDisplayName() + " has placed the Disk into a Jukebox");
 			
 			String query = "INSERT INTO capture_info(`player`, `date`) VALUES('"+p.getDisplayName()+"', NOW());";
-			ResultSet result = null;
-			
-			runQuery(query);
+			this.plugin.runQuery(query);
 		}
 	}
 }
