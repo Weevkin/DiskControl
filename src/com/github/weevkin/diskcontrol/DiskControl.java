@@ -93,12 +93,14 @@ public class DiskControl extends JavaPlugin{
 		this.log.info(this.logPrefix + "Owner is finished initializing");
     }
 	
-	public ResultSet mySQL_Error(){
+	public ResultSet runQuery(String query){
+		String result;
 		if (this.MySQL) {
 			try {
-				result = this.plugin.mysql.query(query);
-			} catch (SQLException e) {
-				e.printStackTrace();
+				result = this.mysql.query(query);
+			}
+			catch (SQLException e) {
+				result = e.printStackTrace();
 			}
 		}
 	}

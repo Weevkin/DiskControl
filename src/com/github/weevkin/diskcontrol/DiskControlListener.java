@@ -65,7 +65,7 @@ public class DiskControlListener implements Listener{
 			String query = "INSERT INTO capture_info(`player`, `date`) VALUES('"+p.getDisplayName()+"', NOW());";
 			ResultSet result = null;
 			
-			mySQL_Error(result);
+			runQuery(query);
 		}
 	}
 }
