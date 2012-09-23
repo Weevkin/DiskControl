@@ -62,20 +62,10 @@ public class DiskControlListener implements Listener{
 			event.getPlayer().getWorld().playEffect(p.getLocation(), Effect.ENDER_SIGNAL, 0);
 			Bukkit.broadcastMessage(p.getDisplayName() + " has placed the Disk into a Jukebox");
 			
-			String query = "INSERT INTO capture_info('player', 'date') VALUES('"+p.getDisplayName()+"','NOW()');";
+			String query = "INSERT INTO capture_info(`player`, `date`) VALUES('"+p.getDisplayName()+"', NOW());";
 			ResultSet result = null;
 			
-			if (plugin.MySQL) {
-				try {
-					result = this.plugin.mysql.query(query);
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			
-			if (result != null){
-				p.sendMessage("Query sent");
-			}
+			mySQL_Error(result);
 		}
 	}
 }

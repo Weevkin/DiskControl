@@ -1,6 +1,8 @@
 package com.github.weevkin.diskcontrol;
 
 import java.io.File;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.logging.Logger;
 
 import lib.PatPeter.SQLibrary.MySQL;
@@ -24,7 +26,7 @@ public class DiskControl extends JavaPlugin{
 	
 	@Override
     public void onEnable(){
-		getServer().getPluginManager().registerEvents(new DiskControlListener(), this);
+		getServer().getPluginManager().registerEvents(new DiskControlListener(this), this);
 		Bukkit.broadcastMessage("Testing");
 		this.log.warning("This is a test");
 		//SQL Stuff
@@ -90,4 +92,14 @@ public class DiskControl extends JavaPlugin{
 		
 		this.log.info(this.logPrefix + "Owner is finished initializing");
     }
+	
+	public ResultSet mySQL_Error(){
+		if (this.MySQL) {
+			try {
+				result = this.plugin.mysql.query(query);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 }
