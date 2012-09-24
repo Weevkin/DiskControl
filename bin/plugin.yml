@@ -3,3 +3,9 @@ main: com.github.weevkin.diskcontrol.DiskControl
 version: 0.0.1
 author: weevkin
 description: A plugin to monitor who stole the record!
+commands:
+   disk:
+      description: Check who has possession of the disk.
+      usage: /<command>
+      permission: DiskControl.basic
+      permission-message: You don't have <permission>
