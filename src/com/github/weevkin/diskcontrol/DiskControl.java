@@ -27,8 +27,6 @@ public class DiskControl extends JavaPlugin{
 	@Override
     public void onEnable(){
 		getServer().getPluginManager().registerEvents(new DiskControlListener(this), this);
-		Bukkit.broadcastMessage("Testing");
-		this.log.warning("This is a test");
 		//SQL Stuff
 		if (this.MySQL) {
 			if (this.dbHost.equals(null)) {
